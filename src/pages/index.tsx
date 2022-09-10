@@ -12,7 +12,18 @@ interface HomeProps {
   }
 }
 
-export default function Home({ product }: HomeProps) {
+// Client-side-rendering - Não precisa de indexação, informações com alta volatilidade de renderização
+// Server-side-rendering - Utilizar para casos de uma página indexada, porém com conteúdo dinâmico da sessão do usuário, informações em tempo real
+// Static Site Generations - Utilizar para casos de uma página HTML igual para todos que consomem, e contém informações indexadas
+
+//------------------------------------------------------------------------------------------------------------------------------------------------
+
+// Post do blog
+
+// Conteúdo (SSG)
+// Comentário (Client-side)
+
+export default function Home({ product }: HomeProps) { 
   return (
     <>
       <Head>
@@ -50,6 +61,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props : {
       product
-    }
+    }, 
+    revalidate: 60 * 60 * 24, // 24 horas
   }
 }
